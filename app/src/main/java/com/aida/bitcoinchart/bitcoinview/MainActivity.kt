@@ -9,11 +9,10 @@ import com.aida.bitcoinchart.R
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import kotlinx.android.synthetic.main.activity_main.*
-import java.text.SimpleDateFormat
 import com.github.mikephil.charting.formatter.ValueFormatter
 import io.reactivex.subjects.PublishSubject
-import kotlin.collections.ArrayList
+import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
 
 
 class MainActivity : FragmentActivity() {
@@ -52,23 +51,24 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun render(viewState: BitcoinViewState) {
-        if (viewState.data != null && viewState.data.isNotEmpty()) {
+        if (!viewState.data.isNullOrEmpty()) {
             setChartData(viewState.data)
+        } else {
+            lineChart.setVisibleOrGone(false)
         }
         progress_bar.setVisibleOrGone(viewState.isLoading)
-        lineChart.setVisibleOrGone(!viewState.isLoading)
         button_30days.isEnabled = !viewState.isLoading
         button_180days.isEnabled = !viewState.isLoading
         button_1year.isEnabled = !viewState.isLoading
         button_60days.isEnabled = !viewState.isLoading
-        if(viewState.error != null){
-            lineChart.visibility = View.GONE
+        if (viewState.error != null) {
             tv_title.text = getString(R.string.error_title, viewState.error.message)
         }
     }
 
     private fun setChartData(entryList: ArrayList<Entry>) {
         lineChart.clearValues()
+        lineChart.setVisibleOrGone(true)
         val set1 = LineDataSet(entryList, getString(R.string.bitcoin_chart))
         lineChart.data.addDataSet(set1)
         lineChart.data.notifyDataChanged()

@@ -15,7 +15,8 @@ import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.Callable
 import javax.inject.Inject
 
-class BitcoinViewModel @Inject constructor(private val bitcoinRepository: BitcoinRepository) : ViewModel() {
+class BitcoinViewModel @Inject constructor(private val bitcoinRepository: BitcoinRepository) :
+    ViewModel() {
 
     val disposables = CompositeDisposable()
 
@@ -33,15 +34,16 @@ class BitcoinViewModel @Inject constructor(private val bitcoinRepository: Bitcoi
     val state: LiveData<BitcoinViewState> = _state
 
 
-    fun getBitcoinPrice(timeSpan: String) = bitcoinRepository.getBitcoinPrice(timeSpan).subscribeOn(Schedulers.io())
-        .map {
-            val list = arrayListOf<Entry>()
-            it.values.forEach {
-                list.add(Entry(it.x.toFloat(), it.y.toFloat()))
+    fun getBitcoinPrice(timeSpan: String) =
+        bitcoinRepository.getBitcoinPrice(timeSpan).subscribeOn(Schedulers.io())
+            .map {
+                val list = arrayListOf<Entry>()
+                it.values.forEach {
+                    list.add(Entry(it.x.toFloat(), it.y.toFloat()))
+                }
+                return@map list
             }
-            return@map list
-        }
-        .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(AndroidSchedulers.mainThread())
 
 
     fun bind(intents: Observable<BitcoinViewIntent>) {
