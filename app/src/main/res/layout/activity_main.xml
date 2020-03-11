@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".bitcoinview.MainActivity">
+  <TextView
+          android:id="@+id/tv_title"
+          android:text="@string/bitcoin_chart"
+          android:layout_margin="15dp"
+          android:gravity="center_horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+  <LinearLayout android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_below="@id/tv_title"
+                android:weightSum="4"
+                android:id="@+id/button_layout"
+                android:layout_height="wrap_content">
+    <Button android:id="@+id/button_30days"
+            android:text="@string/days_30"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    <Button android:id="@+id/button_60days"
+            android:text="@string/days_60"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    <Button android:id="@+id/button_180days"
+            android:text="@string/days_180"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    <Button android:id="@+id/button_1year"
+            android:text="@string/year_1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+  </LinearLayout>
+
+  <com.github.mikephil.charting.charts.LineChart
+          android:id="@+id/lineChart"
+          android:layout_below="@id/button_layout"
+          android:visibility="invisible"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+  </com.github.mikephil.charting.charts.LineChart>
+
+  <ProgressBar
+          android:id="@+id/progress_bar"
+          android:elevation="5dp"
+          android:background="@color/colorPrimaryDark"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+
+</RelativeLayout>

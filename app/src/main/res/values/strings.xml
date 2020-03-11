@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BitcoinChart</string>
+    <string name="days_180">180 days</string>
+    <string name="days_60">60 days</string>
+    <string name="days_30">30 days</string>
+    <string name="bitcoin_chart">Bitcoin chart</string>
+    <string name="year_1">1 year</string>
+    <string name="error_title">Sorry something went wrong: %s</string>
+</resources>
